@@ -1,6 +1,6 @@
 ﻿namespace Application.Common.Interfaces;
 
-public interface ISearchEngine
+public interface ISearchEngineScraper
 {
     List<int> GetSearchRankings(string keyword, string targetUrl, CancellationToken cancellationToken);
 }

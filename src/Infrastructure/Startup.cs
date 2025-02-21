@@ -38,13 +38,8 @@ public static class Startup
 
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddKeyedScoped<ISearchEngine, GoogleSearchEngineScrapeStrategy>("Google");
-        services.AddKeyedScoped<ISearchEngine, BingSearchEngineScrapeStrategy>("Bing");
-
-        services.AddHttpClient<ISearchEngine, GoogleSearchEngineScrapeStrategy>(client =>
-        {
-            client.BaseAddress = new Uri("https://www.google.com");
-        });
+        services.AddKeyedScoped<ISearchEngineScraper, GoogleSearchEngineScrapeStrategy>("Google");
+        services.AddKeyedScoped<ISearchEngineScraper, BingSearchEngineScrapeStrategy>("Bing");
 
         return services;
     }

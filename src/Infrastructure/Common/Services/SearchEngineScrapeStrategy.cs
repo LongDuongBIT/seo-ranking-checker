@@ -7,7 +7,7 @@ using OpenQA.Selenium.Remote;
 
 namespace Infrastructure.Common.Services;
 
-public abstract class SearchEngineScrapeStrategy : ISearchEngine
+public abstract class SearchEngineScrapeStrategy : ISearchEngineScraper
 {
     protected readonly int _maxResults;
     private readonly string _seleniumGridUrl;
