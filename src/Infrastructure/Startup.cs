@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Caching;
 using Infrastructure.Common;
+using Infrastructure.Cors;
 using Infrastructure.Middleware;
 using Infrastructure.OpenAPI;
 using Microsoft.AspNetCore.Builder;
@@ -15,6 +16,7 @@ public static class Startup
         return services
             .AddOpenAPI(config)
             .AddCaching(config)
+            .AddCorsPolicy(config)
             .AddExceptionMiddleware()
             .AddRequestLogging(config)
             .AddServices();
@@ -25,6 +27,7 @@ public static class Startup
         return app
             .UseHttpsRedirection()
             .UseExceptionMiddleware()
+            .UseCorsPolicy()
             .UseRequestLogging(config);
     }
 }
