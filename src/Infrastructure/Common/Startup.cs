@@ -5,7 +5,7 @@ namespace Infrastructure.Common;
 
 internal static class Startup
 {
-    internal static IServiceCollection AddServices(this IServiceCollection services) =>
+    internal static IServiceCollection AddServicesAuto(this IServiceCollection services) =>
         services
             .AddServices(typeof(ITransientService), ServiceLifetime.Transient)
             .AddServices(typeof(IScopedService), ServiceLifetime.Scoped);

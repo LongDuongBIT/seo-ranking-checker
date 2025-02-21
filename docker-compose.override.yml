@@ -6,6 +6,7 @@ services:
       - ASPNETCORE_HTTPS_PORTS=8081
       - "Serilog__WriteTo__0__Args__serverUrl=http://seq:5341"
       - "CacheSettings__RedisURL=redis"
+      - "ScraperSettings__SeleniumGridUrl=http://selenium-hub:4444/wd/hub"
     ports:
       - "8080"
       - "8081"

@@ -1,8 +1,11 @@
-﻿using Infrastructure.Caching;
+﻿using Application.Common.Interfaces;
+using Infrastructure.Caching;
 using Infrastructure.Common;
+using Infrastructure.Common.Services;
 using Infrastructure.Cors;
 using Infrastructure.Middleware;
 using Infrastructure.OpenAPI;
+using Infrastructure.Scraper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +22,8 @@ public static class Startup
             .AddCorsPolicy(config)
             .AddExceptionMiddleware()
             .AddRequestLogging(config)
+            .AddScraper(config)
+            .AddServicesAuto()
             .AddServices();
     }
 
@@ -29,5 +34,18 @@ public static class Startup
             .UseExceptionMiddleware()
             .UseCorsPolicy()
             .UseRequestLogging(config);
+    }
+
+    private static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        services.AddKeyedScoped<ISearchEngine, GoogleSearchEngineScrapeStrategy>("Google");
+        services.AddKeyedScoped<ISearchEngine, BingSearchEngineScrapeStrategy>("Bing");
+
+        services.AddHttpClient<ISearchEngine, GoogleSearchEngineScrapeStrategy>(client =>
+        {
+            client.BaseAddress = new Uri("https://www.google.com");
+        });
+
+        return services;
     }
 }

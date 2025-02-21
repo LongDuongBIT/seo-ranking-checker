@@ -1,0 +1,6 @@
+{
+  "ScraperSettings": {
+    "MaxResults": 100,
+    "SeleniumGridUrl": "http://localhost:4444/wd/hub"
+  }
+}
