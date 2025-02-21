@@ -1,0 +1,25 @@
+services:
+  host:
+    image: ${DOCKER_REGISTRY-}host
+    build:
+      context: .
+      dockerfile: src/Host/Dockerfile
+
+  seq:
+    image: datalust/seq:latest
+    restart: unless-stopped
+    ports:
+      - "5341:80"
+    environment:
+      ACCEPT_EULA: Y
+      SEQ_BASE_URI: http://seq:5341
+
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+    volumes:
+      - /seo/redis:/data

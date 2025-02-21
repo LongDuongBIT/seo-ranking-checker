@@ -1,4 +1,5 @@
-﻿using Infrastructure.Common;
+﻿using Infrastructure.Caching;
+using Infrastructure.Common;
 using Infrastructure.Middleware;
 using Infrastructure.OpenAPI;
 using Microsoft.AspNetCore.Builder;
@@ -12,9 +13,10 @@ public static class Startup
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration config)
     {
         return services
+            .AddOpenAPI(config)
+            .AddCaching(config)
             .AddExceptionMiddleware()
             .AddRequestLogging(config)
-            .AddOpenAPI(config)
             .AddServices();
     }
 
