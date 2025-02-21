@@ -1,3 +1,4 @@
+using Application;
 using Host.Configurations;
 using Infrastructure;
 using Infrastructure.Logging;
@@ -12,9 +13,8 @@ Log.Information("Starting up application...");
 
 builder.RegisterLogging();
 builder.Services.AddControllers();
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
@@ -25,10 +25,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseOpenAPI();
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 
