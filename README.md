@@ -1,5 +1,7 @@
 # SEO Ranking System
 
+## **IMPORTANT**: Google Search uses a really advanced bot detection system, so if the ranking results are not returned, please consider switching to a different network!!!
+
 ## Overview
 SEO Ranking System is a web application designed to scrape search engine results and rank them based on specified keywords. The backend is built using ASP.NET Core 8, while the frontend is developed using React.
 
