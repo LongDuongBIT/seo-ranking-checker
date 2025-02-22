@@ -23,10 +23,14 @@ SEO Ranking System is a web application designed to scrape search engine results
 
 ### Without Docker
 - In the root folder, run `docker compose -f docker-compose.yml -f docker-compose.override.yml up -d seq redis selenium-hub selenium-node-chrome` and wait to start all other services
-- Navigate to **/src/Host** folder, run `dotnet restore`, `dotnet build` and then `dotnet run` to start the backend.
-- Swagger page will be served via `http://localhost:8080/swagger/index.html`.
-- Navigate to **fe** folder, run `npm install`, `npm run dev` to start the frontend. **Remember** to change the env `VITE_API_URL` to `http://localhost:8080/api`.
-- Frontend will be served via `http://localhost:3000/`.
+- To start the backend:
+  + Navigate to **/src/Host** folder
+  + Run `dotnet restore`, `dotnet build` and then `dotnet run` to start the backend.
+  + Swagger page will be served via `http://localhost:8080/swagger/index.html`.
+- To start the frontend:
+  + Navigate to **fe** folder
+  + Run `npm install` and then `npm run dev` to start the frontend. **Remember** to change the env `VITE_API_URL` to `http://localhost:8080/api`!
+  + Frontend will be served via `http://localhost:3000/`.
 
 ## Backend
 The backend of the SEO Ranking System is implemented using ASP.NET Core 8. It includes various services and middleware to handle scraping, caching, logging, and more.
@@ -36,6 +40,7 @@ The backend of the SEO Ranking System is implemented using ASP.NET Core 8. It in
 - **Caching**: Implements caching to store and retrieve search results efficiently, support Redis cache and local cache.
 - **Logging**: Uses Serilog for logging requests and responses, logs will be pushed to a Seq server.
 - **Middleware**: Handles exceptions and logs requests and responses.
+- **Testing**: Uses **NUnit** as a unit-testing framework and **NSubstitute** as a mocking library.
 
 ### Project Structure: Following Clean Architecture
 - `src/Host`: Contains the host for the backend.
