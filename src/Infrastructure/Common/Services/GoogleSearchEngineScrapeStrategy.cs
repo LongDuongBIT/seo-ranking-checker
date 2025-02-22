@@ -1,9 +1,11 @@
 ﻿using Infrastructure.Scraper;
 using Microsoft.Extensions.Options;
+using OpenQA.Selenium;
 
 namespace Infrastructure.Common.Services;
 
-public class GoogleSearchEngineScrapeStrategy(IOptions<ScraperSettings> options) : SearchEngineScrapeStrategy(options)
+public class GoogleSearchEngineScrapeStrategy(IOptions<ScraperSettings> options, IWebDriver webDriver)
+    : SearchEngineScrapeStrategy(options, webDriver)
 {
     public override string Name => "Google";
 

@@ -3,5 +3,6 @@
 public enum SearchEngine
 {
     Google,
-    Bing
+    Bing,
+    Yahoo
 }

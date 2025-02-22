@@ -1,9 +1,11 @@
 ﻿using Infrastructure.Scraper;
 using Microsoft.Extensions.Options;
+using OpenQA.Selenium;
 
 namespace Infrastructure.Common.Services;
 
-internal class BingSearchEngineScrapeStrategy(IOptions<ScraperSettings> options) : SearchEngineScrapeStrategy(options)
+public class BingSearchEngineScrapeStrategy(IOptions<ScraperSettings> options, IWebDriver webDriver)
+    : SearchEngineScrapeStrategy(options, webDriver)
 {
     public override string Name => "Bing";
 

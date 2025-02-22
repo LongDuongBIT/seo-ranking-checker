@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Common.Services;
 
-internal class SearchEngineScrapeStrategyFactory(IServiceProvider serviceProvider) : ISearchEngineScrapeStrategyFactory
+public class SearchEngineScrapeStrategyFactory(IServiceProvider serviceProvider) : ISearchEngineScrapeStrategyFactory
 {
     public ISearchEngineScraper[] GetSearchEngineScrapeStrategies(SearchEngine[] engine)
     {
