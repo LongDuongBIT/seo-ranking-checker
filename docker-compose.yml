@@ -1,4 +1,10 @@
 services:
+  web:
+    image: ${DOCKER_REGISTRY-}web
+    build:
+      context: ./fe
+      dockerfile: Dockerfile
+
   host:
     image: ${DOCKER_REGISTRY-}host
     build:
