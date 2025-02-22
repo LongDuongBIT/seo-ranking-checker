@@ -1,7 +1,7 @@
-import { RankingResponse } from "../apis/types/IRankingResponse";
+import { IRankingResponse } from "../apis/types/IRankingResponse";
 
 interface ResultsProps {
-  results: RankingResponse[];
+  results: IRankingResponse[];
   loading: boolean;
 }
 

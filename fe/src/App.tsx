@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { getSeoRanking } from "./apis/rankingApi";
-import { RankingResponse } from "./apis/types/IRankingResponse";
+import { IRankingResponse } from "./apis/types/IRankingResponse";
 import Results from "./components/Results";
 import SearchForm from "./components/SearchForm";
 
 export default function App() {
-  const [results, setResults] = useState<RankingResponse[]>([]);
+  const [results, setResults] = useState<IRankingResponse[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -16,7 +16,7 @@ export default function App() {
 
     try {
       const results = await getSeoRanking({ keyword, url, searchEngines: [searchEngine] });
-      setResults(results.results);
+      setResults(results);
     } catch (err) {
       setError("Failed to fetch search results.");
     } finally {
