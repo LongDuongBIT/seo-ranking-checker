@@ -8,8 +8,8 @@ services:
       - "CacheSettings__RedisURL=redis"
       - "ScraperSettings__SeleniumGridUrl=http://selenium-hub:4444/wd/hub"
     ports:
-      - "8080"
-      - "8081"
+      - "8080:8080"
+      - "8081:8081"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

@@ -4,5 +4,5 @@ namespace Application.Common.Interfaces;
 
 public interface ISearchEngineScrapeStrategyFactory : IScopedService
 {
-    ISearchEngineScraper GetSearchEngineScrapeStrategy(SearchEngine engine);
+    ISearchEngineScraper[] GetSearchEngineScrapeStrategies(SearchEngine[] engine);
 }

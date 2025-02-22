@@ -5,6 +5,8 @@ namespace Infrastructure.Common.Services;
 
 public class GoogleSearchEngineScrapeStrategy(IOptions<ScraperSettings> options) : SearchEngineScrapeStrategy(options)
 {
+    public override string Name => "Google";
+
     protected override string AnchorSelector => "a";
     protected override string ResultsSelector => "div.tF2Cxc";
 

@@ -2,5 +2,7 @@
 
 public interface ISearchEngineScraper
 {
-    List<int> GetSearchRankings(string keyword, string targetUrl, CancellationToken cancellationToken);
+    string Name { get; }
+
+    Task<List<int>> GetSearchRankings(string keyword, string targetUrl, CancellationToken cancellationToken);
 }

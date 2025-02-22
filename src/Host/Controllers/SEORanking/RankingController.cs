@@ -10,14 +10,23 @@ namespace Host.Controllers.SEORanking
     public class RankingController : VersionedApiController
     {
         [HttpPost]
-        public async Task<ActionResult<FrontEndRetrieveSEORankingResponse>> Retrieve(FrontEndRetrieveSEORankingRequest request, CancellationToken cancellationToken)
+        public async Task<FrontEndRetrieveSEORankingResponse> Retrieve(FrontEndRetrieveSEORankingRequest request, CancellationToken cancellationToken)
         {
-            return Ok(await Mediator.Send(new RetrieveSEORankingRequest
+            var result = await Mediator.Send(new RetrieveSEORankingRequest
             {
                 Keyword = request.Keyword,
                 Url = request.Url,
-                SearchEngine = request.SearchEngine.ToEnum<SearchEngine>()
-            }, cancellationToken));
+                SearchEngines = request.SearchEngines.Select(se => se.ToEnum<SearchEngine>()).ToArray()
+            }, cancellationToken);
+
+            return new FrontEndRetrieveSEORankingResponse
+            {
+                Results = result.Results.Select(r => new FrontEndRetrieveSEORankingResponse.SEORankingResponse
+                {
+                    SearchEngine = r.SearchEngine,
+                    Rankings = r.Rankings
+                }).ToArray()
+            };
         }
     }
 }

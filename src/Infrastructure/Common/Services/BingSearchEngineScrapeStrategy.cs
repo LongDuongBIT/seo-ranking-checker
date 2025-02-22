@@ -5,6 +5,8 @@ namespace Infrastructure.Common.Services;
 
 internal class BingSearchEngineScrapeStrategy(IOptions<ScraperSettings> options) : SearchEngineScrapeStrategy(options)
 {
+    public override string Name => "Bing";
+
     protected override string AnchorSelector => "a";
     protected override string ResultsSelector => "li.b_algo";
 

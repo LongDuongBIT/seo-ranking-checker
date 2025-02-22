@@ -24,6 +24,7 @@ public static class Startup
             .AddRequestLogging(config)
             .AddScraper(config)
             .AddServicesAuto()
+            .AddRouting(options => options.LowercaseUrls = true)
             .AddServices();
     }
 
@@ -32,6 +33,7 @@ public static class Startup
         return app
             .UseHttpsRedirection()
             .UseExceptionMiddleware()
+            .UseRouting()
             .UseCorsPolicy()
             .UseRequestLogging(config);
     }

@@ -18,10 +18,11 @@ public abstract class SearchEngineScrapeStrategy : ISearchEngineScraper
         _maxResults = options.Value.MaxResults;
     }
 
+    public abstract string Name { get; }
     protected abstract string AnchorSelector { get; }
     protected abstract string ResultsSelector { get; }
 
-    public List<int> GetSearchRankings(string keyword, string targetUrl, CancellationToken cancellationToken)
+    public Task<List<int>> GetSearchRankings(string keyword, string targetUrl, CancellationToken cancellationToken)
     {
         List<int> rankings = [];
         var options = new ChromeOptions();
@@ -56,7 +57,7 @@ public abstract class SearchEngineScrapeStrategy : ISearchEngineScraper
             driver.Quit();
         }
 
-        return rankings;
+        return Task.FromResult(rankings);
     }
 
     protected abstract string Url(string keyword);

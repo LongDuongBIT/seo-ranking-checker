@@ -6,7 +6,12 @@ namespace Infrastructure.Common.Services;
 
 internal class SearchEngineScrapeStrategyFactory(IServiceProvider serviceProvider) : ISearchEngineScrapeStrategyFactory
 {
-    public ISearchEngineScraper GetSearchEngineScrapeStrategy(SearchEngine engine)
+    public ISearchEngineScraper[] GetSearchEngineScrapeStrategies(SearchEngine[] engine)
+    {
+        return engine.Select(GetSearchEngineScrapeStrategy).ToArray();
+    }
+
+    private ISearchEngineScraper GetSearchEngineScrapeStrategy(SearchEngine engine)
     {
         return engine switch
         {
