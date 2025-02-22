@@ -2,7 +2,7 @@ import axios from "axios";
 import { IRankingRequest } from "./types/IRankingRequest";
 import { IRankingResponse } from "./types/IRankingResponse";
 
-const API_BASE_URL = "https://localhost:8081/api";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api";
 
 export async function getSeoRanking(
   params: IRankingRequest

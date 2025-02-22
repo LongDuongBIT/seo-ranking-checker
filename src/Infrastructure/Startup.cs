@@ -31,7 +31,6 @@ public static class Startup
     public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app, IConfiguration config)
     {
         return app
-            .UseHttpsRedirection()
             .UseExceptionMiddleware()
             .UseRouting()
             .UseCorsPolicy()
