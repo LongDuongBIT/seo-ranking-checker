@@ -37,10 +37,10 @@ public class RetrieveSEORankingRequestHandlerTest
 
         // Assert
         Assert.That(result, Is.Not.Null);
-        Assert.That(result.Results, Has.Length.EqualTo(1));
+        Assert.That(result, Has.Count.EqualTo(1));
         Assert.Multiple(() =>
         {
-            Assert.That(result.Results[0].Rankings, Is.EquivalentTo(new int[] { 1, 2, 3 }));
+            Assert.That(result[0].Rankings, Is.EquivalentTo(new int[] { 1, 2, 3 }));
         });
         await searchEngineScraperMock.Received(1).GetSearchRankings(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CancellationToken>());
     }
@@ -51,8 +51,8 @@ public class RetrieveSEORankingRequestHandlerTest
         // Arrange
         var factoryMock = Substitute.For<ISearchEngineScrapeStrategyFactory>();
         var cacheServiceMock = Substitute.For<ICacheService>();
-        cacheServiceMock.GetAsync<RetrieveSEORankingResponse.SEORankingResponse>(Arg.Any<string>(), Arg.Any<CancellationToken>()).Returns(
-            new RetrieveSEORankingResponse.SEORankingResponse
+        cacheServiceMock.GetAsync<SEORankingResult>(Arg.Any<string>(), Arg.Any<CancellationToken>()).Returns(
+            new SEORankingResult
             {
                 SearchEngine = "Google",
                 Rankings = [1, 2, 3]
@@ -81,13 +81,13 @@ public class RetrieveSEORankingRequestHandlerTest
 
         // Assert
         Assert.That(result, Is.Not.Null);
-        Assert.That(result.Results, Has.Length.EqualTo(1));
+        Assert.That(result, Has.Count.EqualTo(1));
         Assert.Multiple(() =>
         {
-            Assert.That(result.Results[0].SearchEngine, Is.EqualTo("Google"));
-            Assert.That(result.Results[0].Rankings, Is.EquivalentTo(new int[] { 1, 2, 3 }));
+            Assert.That(result[0].SearchEngine, Is.EqualTo("Google"));
+            Assert.That(result[0].Rankings, Is.EquivalentTo(new int[] { 1, 2, 3 }));
         });
         await searchEngineScraperMock.DidNotReceive().GetSearchRankings(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<CancellationToken>());
-        await cacheServiceMock.DidNotReceive().SetAsync(Arg.Any<string>(), Arg.Any<RetrieveSEORankingResponse.SEORankingResponse>(), Arg.Any<TimeSpan>(), Arg.Any<CancellationToken>());
+        await cacheServiceMock.DidNotReceive().SetAsync(Arg.Any<string>(), Arg.Any<SEORankingResult>(), Arg.Any<TimeSpan>(), Arg.Any<CancellationToken>());
     }
 }

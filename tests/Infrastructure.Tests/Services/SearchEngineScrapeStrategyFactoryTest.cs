@@ -55,7 +55,7 @@ public class SearchEngineScrapeStrategyFactoryTest
         services.AddKeyedScoped<ISearchEngineScraper, BingSearchEngineScrapeStrategy>("Bing");
         services.AddScoped<IWebDriver, RemoteWebDriver>(f =>
         {
-            return new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), new ChromeOptions());
+            return null!;
         });
 
         var configurationBuilder = new ConfigurationBuilder();
