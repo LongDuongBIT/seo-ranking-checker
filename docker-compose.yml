@@ -66,3 +66,21 @@ services:
     depends_on:
       - web
       - host
+
+  grafana:
+    image: grafana/grafana-enterprise
+    restart: unless-stopped
+    ports:
+      - 9999:3000
+    volumes:
+      - ./monitoring/grafana/grafana.db:/var/lib/grafana/grafana.db
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - 9090:9090
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'

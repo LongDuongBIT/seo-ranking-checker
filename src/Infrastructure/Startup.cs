@@ -4,6 +4,7 @@ using Infrastructure.Common;
 using Infrastructure.Common.Services;
 using Infrastructure.Cors;
 using Infrastructure.Middleware;
+using Infrastructure.Monitoring;
 using Infrastructure.OpenAPI;
 using Infrastructure.Scraper;
 using Microsoft.AspNetCore.Builder;
@@ -23,6 +24,7 @@ public static class Startup
             .AddExceptionMiddleware()
             .AddRequestLogging(config)
             .AddScraper(config)
+            .AddMonitoring(config)
             .AddServicesAuto()
             .AddRouting(options => options.LowercaseUrls = true)
             .AddServices();
@@ -34,7 +36,8 @@ public static class Startup
             .UseExceptionMiddleware()
             .UseRouting()
             .UseCorsPolicy()
-            .UseRequestLogging(config);
+            .UseRequestLogging(config)
+            .UseMonitoring();
     }
 
     private static IServiceCollection AddServices(this IServiceCollection services)
