@@ -15,7 +15,7 @@ public class BingSearchEngineScrapeStrategyTest
     public async Task BingSearchEngineScrapeStrategy_GetSearchEngineScrapeStrategies_ShouldReturnRankingsSuccessfully()
     {
         // Arrange
-        var webDriver = Substitute.For<IWebDriver>();
+        var webDriver = Substitute.For<Lazy<IWebDriver>>();
         var searchResultsElement = Substitute.For<IWebElement>();
         searchResultsElement.Text.Returns("text");
         searchResultsElement.GetAttribute("href").Returns("href");
@@ -24,7 +24,7 @@ public class BingSearchEngineScrapeStrategyTest
         itemElement.GetAttribute("href").Returns("targetUrl");
         searchResultsElement.FindElement(Arg.Any<By>()).Returns(itemElement);
 
-        webDriver.FindElements(Arg.Any<By>()).Returns(new ReadOnlyCollection<IWebElement>([searchResultsElement]));
+        webDriver.Value.FindElements(Arg.Any<By>()).Returns(new ReadOnlyCollection<IWebElement>([searchResultsElement]));
 
         var searchEngineScrapeStrategy = new BingSearchEngineScrapeStrategy(_settings, webDriver);
 
@@ -44,7 +44,7 @@ public class BingSearchEngineScrapeStrategyTest
     public async Task BingSearchEngineScrapeStrategy_GetSearchEngineScrapeStrategies_ShouldReturnEmptyRankings()
     {
         // Arrange
-        var webDriver = Substitute.For<IWebDriver>();
+        var webDriver = Substitute.For<Lazy<IWebDriver>>();
         var searchResultsElement = Substitute.For<IWebElement>();
         searchResultsElement.Text.Returns("text");
         searchResultsElement.GetAttribute("href").Returns("href");
@@ -53,7 +53,7 @@ public class BingSearchEngineScrapeStrategyTest
         itemElement.GetAttribute("href").Returns("targetUrl");
         searchResultsElement.FindElement(Arg.Any<By>()).Returns(itemElement);
 
-        webDriver.FindElements(Arg.Any<By>()).Returns(new ReadOnlyCollection<IWebElement>([searchResultsElement]));
+        webDriver.Value.FindElements(Arg.Any<By>()).Returns(new ReadOnlyCollection<IWebElement>([searchResultsElement]));
 
         var searchEngineScrapeStrategy = new BingSearchEngineScrapeStrategy(_settings, webDriver);
 

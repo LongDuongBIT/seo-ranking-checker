@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace Infrastructure.Common.Services;
 
-public class GoogleSearchEngineScrapeStrategy(IOptions<ScraperSettings> options, IWebDriver webDriver)
+public class GoogleSearchEngineScrapeStrategy(IOptions<ScraperSettings> options, Lazy<IWebDriver> webDriver)
     : SearchEngineScrapeStrategy(options, webDriver)
 {
     public override string Name => "Google";

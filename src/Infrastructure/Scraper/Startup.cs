@@ -14,12 +14,15 @@ internal static class Startup
         services.Configure<ScraperSettings>(scraperConfig);
         var settings = scraperConfig.Get<ScraperSettings>() ?? throw new InvalidOperationException("ScraperSettings is not configured");
 
-        services.AddScoped<IWebDriver, RemoteWebDriver>(f =>
+        services.AddScoped(f =>
         {
-            var options = new ChromeOptions();
-            options.AddExcludedArgument("enable-automation");
-            options.AddArgument("--disable-blink-features=AutomationControlled");
-            return new RemoteWebDriver(new Uri(settings.SeleniumGridUrl!), options);
+            return new Lazy<IWebDriver>(() =>
+            {
+                var options = new ChromeOptions();
+                options.AddExcludedArgument("enable-automation");
+                options.AddArgument("--disable-blink-features=AutomationControlled");
+                return new RemoteWebDriver(new Uri(settings.SeleniumGridUrl!), options);
+            });
         });
 
         return services;

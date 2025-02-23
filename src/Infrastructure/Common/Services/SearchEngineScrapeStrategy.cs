@@ -5,17 +5,16 @@ using OpenQA.Selenium;
 
 namespace Infrastructure.Common.Services;
 
-public abstract class SearchEngineScrapeStrategy : ISearchEngineScraper
+public abstract class SearchEngineScrapeStrategy : ISearchEngineScraper, IDisposable
 {
     protected readonly int _maxResults;
-    private readonly IWebDriver _driver;
-
+    private readonly Lazy<IWebDriver> _driver;
     private bool _disposed = false;
 
-    protected SearchEngineScrapeStrategy(IOptions<ScraperSettings> options, IWebDriver driver)
+    protected SearchEngineScrapeStrategy(IOptions<ScraperSettings> options, Lazy<IWebDriver> driver)
     {
         _maxResults = options.Value.MaxResults;
-        _driver = driver;
+        _driver = driver ?? throw new ArgumentNullException(nameof(driver));
     }
 
     public abstract string Name { get; }
@@ -31,10 +30,9 @@ public abstract class SearchEngineScrapeStrategy : ISearchEngineScraper
     public Task<List<int>> GetSearchRankings(string keyword, string targetUrl, CancellationToken cancellationToken)
     {
         List<int> rankings = [];
+        _driver.Value.Navigate().GoToUrl(Url(keyword));
 
-        _driver.Navigate().GoToUrl(Url(keyword));
-
-        var results = _driver.FindElements(By.CssSelector(ResultsSelector));
+        var results = _driver.Value.FindElements(By.CssSelector(ResultsSelector));
         int rank = 1;
 
         foreach (var result in results)
@@ -64,7 +62,10 @@ public abstract class SearchEngineScrapeStrategy : ISearchEngineScraper
         {
             if (disposing)
             {
-                _driver?.Quit();
+                if (_driver.IsValueCreated)
+                {
+                    _driver.Value.Quit();
+                }
             }
 
             _disposed = true;
