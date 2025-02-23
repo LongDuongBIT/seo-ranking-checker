@@ -13,7 +13,7 @@ SEO Ranking System is a web application designed to scrape search engine results
 
 ## High-level design decisions:
 - [**Selenium**](https://www.selenium.dev/documentation/overview/) is used because Google's advanced bot detection system makes scraping the HTML content via simple GET requests really hard.
-- [**Selenium Grid**](https://www.selenium.dev/documentation/grid/) is used to distribute the load to scrape the search results to **multiple Selenium nodes/workers**, which makes **horizontal scaling** very easy.
+- [**Selenium Grid**](https://www.selenium.dev/documentation/grid/) is used to distribute the load to scrape the search results to **multiple Selenium nodes/workers**, which makes **horizontal scaling** very easy. **Total sessions = (number of Selenium nodes) x (number of concurrent sessions per node, default is 5)**.
 - [**Seq**](https://datalust.co/seq) is used to collect, search and analyze logs.
 - [**Prometheus**](https://prometheus.io/) collects metrics from the backend every 5 seconds.
 - [**Grafana**](https://grafana.com/) is used visualize metrics from Prometheus.
