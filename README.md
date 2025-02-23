@@ -5,6 +5,9 @@
 ## Overview
 SEO Ranking System is a web application designed to scrape search engine results and rank them based on specified keywords. The backend is built using ASP.NET Core 8, while the frontend is developed using React.
 
+## User interface
+<img src="./img/result-google.png" width="768">
+
 ## High-level architecture
 <img src="./img/high-level-architecture.png" width="768">
 
