@@ -49,6 +49,11 @@ SEO Ranking System is a web application designed to scrape search engine results
 - In the root folder, simply run `docker compose -f docker-compose.yml -f docker-compose.override.yml up -d` and wait until it finishes.
 - Frontend will be served via [http://localhost:3000/](http://localhost:3000/).
 - Swagger page will be served via [http://localhost:8888/swagger/index.html](http://localhost:8888/swagger/index.html).
+- Selenium Grid: [http://localhost:4444/](http://localhost:4444/)
+- Seq: [http://localhost:5341/](http://localhost:5341/)
+- Grafana: [http://localhost:9999/](http://localhost:9999/):
+  + User name: admin
+  + Password: admin
 
 ### Without Docker
 - In the root folder, run `docker compose -f docker-compose.yml -f docker-compose.override.yml up -d seq redis selenium-hub selenium-node-chrome` and wait to start all other services
@@ -60,12 +65,6 @@ SEO Ranking System is a web application designed to scrape search engine results
   + Navigate to **fe** folder
   + Run `npm install` and then `npm run dev` to start the frontend. **Remember** to change the env `VITE_API_URL` to `http://localhost:8080/api`!
   + Frontend will be served via [http://localhost:3000/](http://localhost:3000/).
-
-- Selenium Grid: [http://localhost:4444/](http://localhost:4444/)
-- Seq: [http://localhost:5341/](http://localhost:5341/)
-- Grafana: [http://localhost:9999/](http://localhost:9999/):
-  + User name: admin
-  + Password: admin
 
 ## Backend
 The backend of the SEO Ranking System is implemented using ASP.NET Core 8. It includes various services and middleware to handle scraping, caching, logging, and more.
